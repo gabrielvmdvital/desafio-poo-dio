@@ -6,6 +6,22 @@ public class Curso extends Conteudo{
 
     @Override
     public double calcularXp() {
+
+        if(getNivel() != null){
+            double experienciaPorCurso = 0;
+            switch (getNivel()){
+                case FACIL -> {
+                    experienciaPorCurso = 1 * XP_PADRAO * cargaHoraria;
+                }
+                case MEDIO -> {
+                experienciaPorCurso = 2*XP_PADRAO * cargaHoraria;
+            }
+                case DIFICIL -> {
+                    experienciaPorCurso = 3 * XP_PADRAO * cargaHoraria;
+                }
+            }
+            return experienciaPorCurso;
+        }
         return XP_PADRAO * cargaHoraria;
     }
 
@@ -26,6 +42,7 @@ public class Curso extends Conteudo{
         return "Curso{" +
                 "titulo='" + getTitulo() + '\'' +
                 ", descricao='" + getDescricao() + '\'' +
+                ", Dificuldade='" + getNivel() + '\'' +
                 ", cargaHoraria=" + cargaHoraria +
                 '}';
     }
