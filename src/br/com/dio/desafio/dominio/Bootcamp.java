@@ -1,10 +1,7 @@
 package br.com.dio.desafio.dominio;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Bootcamp {
     private String nome;
@@ -67,4 +64,22 @@ public class Bootcamp {
     public int hashCode() {
         return Objects.hash(nome, descricao, dataInicial, dataFinal, devsInscritos, conteudos);
     }
+
+    private Set<Dev> rankeamentoDosDevs(){
+        Set<Dev> devsPorRanking = new TreeSet<>(Collections.reverseOrder());
+        if(!devsInscritos.isEmpty()){
+            devsPorRanking.addAll(this.devsInscritos);
+        }
+        return devsPorRanking;
+    }
+
+    public void showRankingDev(){
+        Iterator<Dev> iter = this.rankeamentoDosDevs().iterator();
+        while(iter.hasNext()){
+            Dev dev = iter.next();
+            System.out.println("A(O) dev: "+dev.getNome()+ " possui " + dev.calcularTotalXp() + " de experiência no bootcamp!");
+            System.out.println();
+        }
+    }
+
 }
